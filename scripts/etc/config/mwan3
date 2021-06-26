@@ -17,6 +17,18 @@ config rule 'askdd_hk0'
 	option sticky '0'
 	option use_policy 'default'
 
+config rule 'mainland_ip'
+	option proto 'all'
+	option sticky '0'
+	option ipset 'ip_mainland'
+	option use_policy 'default'
+
+config rule 'mainland_net'
+	option proto 'all'
+	option sticky '0'
+	option ipset 'net_mainland'
+	option use_policy 'default'
+
 config rule 'hongkong_ip'
 	option proto 'all'
 	option sticky '0'

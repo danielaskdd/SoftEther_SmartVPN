@@ -59,11 +59,14 @@ format2domain()
 
     cat $_rule | while read line
     do
-        if [[ "${line:0:1}" = "." ]];
-        then
-            echo "${line:1}" >> $_dmf
-        else
-            echo "$line" >> $_ipf
+        if [ -n "$line" ]; then
+            if [[ "${line:0:1}" = "." ]]; then
+                echo "${line:1}" >> $_dmf
+            elif [[ "${line:0:1}" = "#" ]]; then
+                line=""
+            else
+                echo "$line" >> $_ipf
+            fi
         fi
     done
 }
