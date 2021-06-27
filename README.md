@@ -31,8 +31,8 @@ SoftEther是一个功能强大的软交换机，可以用它灵活地搭建各�
 opkg remove luci-app-docker-ce
 opkg remove docker-ce
 
-# docker本身可以建立各种复杂的虚拟网络环境，配置不好会导致路由一场，因此建议卸载
-# docker会影响UDP转发，日后设备想作为主路使用就必须卸载掉docker
+# docker及容器中有特权的系统可以操控设备的网络环境，导致路由工作异常，建议卸载
+# docker会影响路由本身的端口映射，如果R4S作为主路使用就必须卸载掉docker
 ```
 
 * 安装一些调试必备软件
