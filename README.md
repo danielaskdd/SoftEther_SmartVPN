@@ -294,30 +294,7 @@ opkg install luci-app-mwan3
 
 #### 小米路由DHCP设置
 
-* 方案一：仅指定设备使用旁路由智能上网
-
-```
-- 修改小米路由上的 /etc/config/dhcp 文件，添加网关配置模版
-config tag 'main_gtwy'
-    list dhcp_option '3,192.168.3.1'
-    list dhcp_option '6,192.168.3.1'
-    
-config tag 'side_gtwy'
-    list dhcp_option '3,192.168.3.254'
-    list dhcp_option '6,192.168.3.254'
-
-- 为每个设备在 /etc/config/dhcp 文件中对应的host小节中指定tag为“side_gtwy”的dhcp选项：
-config host '38c98641db1e'
-    option mac '38:c9:86:41:db:1e'
-    option name '38c98641db1e'
-    option ip '192.168.3.118'
-    option tag 'side_gtwy'
-
-注：host配置的tag选项之前的内容改为为小米路由设置DHCP静态IP分配的时候自动生成
-   因此对需要使用旁路由的设备先在路由器的WEB UI把它添加到DHCP静态IP分配中
-```
-
-* 方案二：仅指定设备不使用盘路由（指定设备仅能访问国内网络）
+* 让DHCP服务推动的默认路改为旁路由
 
 ```
 - 修改小米路由的 /etc/config/dhcp 文件，给lan网段添加DNS和网关推送内容：
@@ -326,7 +303,24 @@ config dhcp 'lan'
 		...
 		list dhcp_option '3,192.168.3.254'
     list dhcp_option '6,192.168.3.254'
+```
+
+* 对于不需要智能路由的设备让其使用主路由（例如一些智能家电设备）
+
+```
+- 修改小米路由上的 /etc/config/dhcp 文件，添加网关配置模版
+config tag 'main_gtwy'
+    list dhcp_option '3,192.168.3.1'
+    list dhcp_option '6,192.168.3.1'
     
-- 对不需要使用旁路由的设备，按方法一的描述给其指定tag为“main_gtwy”的dhcp选项
+- 为每个设备在 /etc/config/dhcp 文件中对应的host条目中增加tag选项：
+config host '38c98641db1e'
+    option mac '38:c9:86:41:db:1e'
+    option name '38c98641db1e'
+    option ip '192.168.3.118'
+    option tag 'main_gtwy'
+
+注：host条目为小米路由设置静态IP分配的时候自动生成，
+   请先用路由器的WEB为需要使用主路由的设备设定DHCP静态IP分配
 ```
 
