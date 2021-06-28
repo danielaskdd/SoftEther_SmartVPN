@@ -83,7 +83,7 @@ smartvpn_enable()
     ifup vpnhub02
 
     # 根据proxy.txt生成dnsmasq配置
-    gensmartdns.sh "/etc/smartvpn/proxy_oversea.txt" "/etc/smartvpn/dm_oversea.conf" "/tmp/smartvpn_ip.txt" "ip_oversea" "8.8.8.8" > /dev/null 2>&1
+    gensmartdns.sh "/etc/smartvpn/proxy_oversea.txt" "/tmp/dm_oversea.conf" "/tmp/smartvpn_ip.txt" "ip_oversea" "8.8.8.8" > /dev/null 2>&1
 
     [ -f /tmp/smartvpn_ip.txt ] && {
         smartvpn_ipset_add_by_file /tmp/smartvpn_ip.txt net_oversea
@@ -91,7 +91,7 @@ smartvpn_enable()
         rm /tmp/smartvpn_ip.txt
     }
 
-    gensmartdns.sh "/etc/smartvpn/proxy_hongkong.txt" "/etc/smartvpn/dm_hongkong.conf" "/tmp/smartvpn_ip.txt" "ip_hongkong" "1.1.1.1" > /dev/null 2>&1
+    gensmartdns.sh "/etc/smartvpn/proxy_hongkong.txt" "/tmp/dm_hongkong.conf" "/tmp/smartvpn_ip.txt" "ip_hongkong" "1.1.1.1" > /dev/null 2>&1
 
     [ -f /tmp/smartvpn_ip.txt ] && {
         smartvpn_ipset_add_by_file /tmp/smartvpn_ip.txt net_hongkong
@@ -99,7 +99,7 @@ smartvpn_enable()
         rm /tmp/smartvpn_ip.txt
     }
 
-    gensmartdns.sh "/etc/smartvpn/proxy_mainland.txt" "/etc/smartvpn/dm_mainland.conf" "/tmp/smartvpn_ip.txt" "ip_mainland" "119.29.29.29" > /dev/null 2>&1
+    gensmartdns.sh "/etc/smartvpn/proxy_mainland.txt" "/tmp/dm_mainland.conf" "/tmp/smartvpn_ip.txt" "ip_mainland" "119.29.29.29" > /dev/null 2>&1
 
     [ -f /tmp/smartvpn_ip.txt ] && {
         smartvpn_ipset_add_by_file /tmp/smartvpn_ip.txt net_mainland
@@ -110,9 +110,12 @@ smartvpn_enable()
     smartvpn_ipset_create   # 创建ipset
 
     # 把dnsmasq配置文件拷贝到 /etc/dnsmasq.d 目录下
-    cp -p /etc/smartvpn/dm_oversea.conf /tmp/dnsmasq.d
-    cp -p /etc/smartvpn/dm_hongkong.conf /tmp/dnsmasq.d
-    cp -p /etc/smartvpn/dm_mainland.conf /tmp/dnsmasq.d
+    cp -p /tmp/dm_oversea.conf /tmp/dnsmasq.d
+    cp -p /tmp/dm_hongkong.conf /tmp/dnsmasq.d
+    cp -p /tmp/dm_mainland.conf /tmp/dnsmasq.d
+    rm /tmp/dm_oversea.conf
+    rm /tmp/dm_hongkong.conf
+    rm /tmp/dm_mainland.conf
 
     smartvpn_logger "Restarting dnsmasq..."
     /etc/init.d/dnsmasq restart  # 重启nsmasq

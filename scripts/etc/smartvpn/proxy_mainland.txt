@@ -1,2 +1,11 @@
 # 网段格式: xxx.xxx.xxx.xxx/yy  域名格式以点开头 （最后的空行不要删掉）
+.com.cn
+.163.com
+.baidu.com
+.douyin.com
+.qq.com
 .speedtest.net
+.taobao.com
+.tmall.com
+.toutiao.com
+.weibo.com

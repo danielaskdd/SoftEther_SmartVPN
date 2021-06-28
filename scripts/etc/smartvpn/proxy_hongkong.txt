@@ -5,6 +5,7 @@
 .gitlab.com
 .gitlab.io
 .gitlab-static.net
+.ggpht.com
 .google-analytics.com
 .google-update.net
 .google.co.th

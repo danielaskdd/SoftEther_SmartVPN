@@ -1373,3 +1373,4 @@
 .v2ex.com
 .indiatimes.com
 .misstar.com
+.gnu.org
