@@ -41,13 +41,19 @@ smartvpn_ipset_create()
 
     ipset list | grep ip_oversea  > /dev/null 2>&1
     if [ $? -ne 0 ]; then
+        smartvpn_logger "creating ipset for individual host..."
         ipset create ip_oversea  hash:ip > /dev/null 2>&1
         ipset create ip_hongkong  hash:ip > /dev/null 2>&1
         ipset create ip_mainland  hash:ip > /dev/null 2>&1
     else
-        ipset flush ip_oversea
-        ipset flush ip_hongkong
-        ipset flush ip_mainland
+        if [[ "$SOFT" != "soft" ]]; then
+            smartvpn_logger "Flushing ipset for individual host..."
+            ipset flush ip_oversea
+            ipset flush ip_hongkong
+            ipset flush ip_mainland
+        else
+            smartvpn_logger "Start at soft mode: keep ipset for individual host"
+        fi
     fi
 }
 
@@ -194,7 +200,7 @@ softether_status_get()
 
 smartvpn_usage()
 {
-    echo "usage: ./softether_vpn.sh on|off"
+    echo "usage: ./softether_vpn.sh on|off [soft]"
     echo ""
     echo "softether status = $softether_status"
     echo "smartvpn status = $vpn_status"
@@ -202,7 +208,7 @@ smartvpn_usage()
     return
 }
 
-#
+# main
 
 vpn_status_get
 softether_status_get
@@ -211,12 +217,12 @@ config_load "smartvpn"
 config_get smartvpn_cfg_switch vpn switch &>/dev/null;
 
 OPT=$1
+SOFT=$2
 
 smartvpn_lock="/var/run/softether_vpn.lock"
 trap "lock -u $smartvpn_lock; exit 1" SIGHUP SIGINT SIGTERM
 lock $smartvpn_lock
 
-#main
 case $OPT in
     on)
         smartvpn_open
