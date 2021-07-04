@@ -34,9 +34,11 @@
 216.239.32.0/19
 216.58.192.0/18
 .com.hk
+.cnn.com
 .cloudfare.com
 .stackpathcdn.com
 .icloud.com
+.foxnews.com
 .github.com
 .github.io
 .gitlab.com
@@ -72,6 +74,8 @@
 .googletagservices.com
 .googleusercontent.com
 .googlevideo.com
+.kcmetercec.top
+.msnbc.com
 .stackexchange.com
 .twitter.com
 .twitter.com.au
