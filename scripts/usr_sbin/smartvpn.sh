@@ -84,6 +84,10 @@ smartdns_conf_path="/etc/smartvpn/"
 smartvpn_enable()
 {
 
+    ifdown lanman
+    ifdown vpnhub01
+    ifdown vpnhub02
+
     ifup lanman
     ifup vpnhub01
     ifup vpnhub02
@@ -200,10 +204,12 @@ softether_status_get()
 
 smartvpn_usage()
 {
-    echo "usage: ./softether_vpn.sh on|off [soft]"
+    echo "usage: smartvpn.sh on|off [soft]"
     echo ""
     echo "softether status = $softether_status"
     echo "smartvpn status = $vpn_status"
+    echo ""
+    echo "# soft：keep current ipset result"
     echo ""
     return
 }
@@ -218,6 +224,14 @@ config_get smartvpn_cfg_switch vpn switch &>/dev/null;
 
 OPT=$1
 SOFT=$2
+
+if [ ! -z "$SOFT" ]; then
+    if [ "$SOFT" != "soft" ]; then
+        echo
+        echo "***Error*** second parameter must be 'soft'"
+        OPT=""
+    fi
+fi
 
 smartvpn_lock="/var/run/softether_vpn.lock"
 trap "lock -u $smartvpn_lock; exit 1" SIGHUP SIGINT SIGTERM
