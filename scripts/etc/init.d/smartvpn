@@ -7,17 +7,18 @@ PATH=/opt/sbin:/opt/bin:/opt/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/u
 
 start() {
 	logger -t softether "Starting smartvpn..."
-	softeher_vpn.sh on
+	smartvpn.sh on
 }
 
 stop() {
 	logger -t softether "Stoping smartvpn..."
-	softeher_vpn.sh off
+	smartvpn.sh off
 }
 
 restart() {
-	start
 	stop
+	sleep3
+	start
 }
 
 reload() {

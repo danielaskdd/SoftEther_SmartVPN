@@ -243,7 +243,6 @@ opkg install luci-app-mwan3
 	有多个国际线路出口的时候，可以给策略配置更多的成员来实现负载均衡
 	
 - 规则用于设定具体的路由：
-	askdd_hk_local：访问香港出口服务器内网ip（用于速度测试，请根据实际网络设置ip）
 	askdd_hk / askdd_hk0：香港出口服务器外网ip走原来的带出口
 	askdd_us:美国出口服务器外网ip走默认宽带出口
 	ip_hongkong：对应的ipset的主机走香港出口

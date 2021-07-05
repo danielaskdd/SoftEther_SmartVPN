@@ -44,12 +44,13 @@ then
     if [ $smartvpn_cfg_switch != "1" ];
     then
         touch /tmp/smartvpn_set_main_router
-        /usr/sbin/sideway_dhcp.sh off
+        /usr/sbin/sideway_dhcp.sh off           # 关闭旁路由
+        /usr/sbin/softeher_vpn.sh on            # 启动主路由的智能上网
     fi
 else
     if [ $smartvpn_cfg_switch == "1" ];
     then
         touch /tmp/smartvpn_set_sideway_router
-        /usr/sbin/sideway_dhcp.sh on
+        /usr/sbin/sideway_dhcp.sh on            # 启动旁路由，不主动关闭组路由的智能上网（需关闭请重启路由）
     fi
 fi
