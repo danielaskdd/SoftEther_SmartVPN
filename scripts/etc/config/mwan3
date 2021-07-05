@@ -1,10 +1,4 @@
 
-config rule 'askdd_hk_local'
-	option proto 'all'
-	option sticky '0'
-	option use_policy 'hongkong'
-	option dest_ip '10.1.0.0/24'
-
 config rule 'askdd_hk'
 	option proto 'all'
 	option sticky '0'
@@ -13,6 +7,12 @@ config rule 'askdd_hk'
 
 config rule 'askdd_hk0'
 	option dest_ip '124.156.158.180'
+	option proto 'all'
+	option sticky '0'
+	option use_policy 'default'
+
+config rule 'askdd_us'
+	option dest_ip '23.239.5.137'
 	option proto 'all'
 	option sticky '0'
 	option use_policy 'default'
