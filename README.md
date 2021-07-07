@@ -264,7 +264,7 @@ opkg install luci-app-mwan3
 
 ```
 - 把scripts/usr_sbin目录中的启动智能路由的脚本拷贝到R4S的/usr/sbin目录
-		softether_vpn.sh	 # 手动启动VPN
+		smartvpn.sh	 # 手动启动VPN
 		gensmartdns.sh
 - 把scripts/ect/init.d/目录的开机启动脚本拷贝到R4S的/init/init.d目录
 		smartvpn		# 开启启动脚本
