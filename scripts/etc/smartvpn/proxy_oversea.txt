@@ -1507,6 +1507,7 @@
 .dnsrd.com
 .dnssec.net
 .dnvod.tv
+.docker.com
 .doctorvoice.org
 .documentingreality.com
 .dogfartnetwork.com
@@ -4383,6 +4384,7 @@
 .privatevpn.com
 .procopytips.com
 .programastwitter.com
+.programmersought.com
 .project-syndicate.org
 .prosiben.de
 .protonvpn.com
